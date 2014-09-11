@@ -74,8 +74,8 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^cm_") ; then
-       CM_BUILD=$(echo -n $1 | sed -e 's/^cm_//g')
+    if (echo -n $1 | grep -q -e "^ldroid_") ; then
+       CM_BUILD=$(echo -n $1 | sed -e 's/^ldroid_//g')
        export BUILD_NUMBER=$((date +%s%N ; echo $CM_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10)
     else
        CM_BUILD=
@@ -528,7 +528,7 @@ function breakfast()
             lunch $target
         else
             # This is probably just the CM model name
-            lunch cm_$target-userdebug
+            lunch ldroid_$target-userdebug
         fi
     fi
     return $?
@@ -686,7 +686,7 @@ function eat()
 {
     if [ "$OUT" ] ; then
         MODVERSION=$(get_build_var CM_VERSION)
-        ZIPFILE=cm-$MODVERSION.zip
+        ZIPFILE=L-Droid-$MODVERSION.zip
         ZIPPATH=$OUT/$ZIPFILE
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
